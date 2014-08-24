@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.multipart.TMultiPart;
+import codechicken.multipart.TNormalOcclusion;
 
-public class ExamplePipe extends TMultiPart
+public class ExamplePipe extends TMultiPart implements TNormalOcclusion
 {
+    public static final String type = "examplePipe";
+    
     @Override
     public String getType()
     {
-        return "examplePipe";
+        return type;
     }
     
     public ArrayList<Cuboid6> generateBoxes()
@@ -27,16 +30,19 @@ public class ExamplePipe extends TMultiPart
         return generateBoxes();
     }
     
-    public Cuboid6[] getOcclusionBoxes()
+    public Iterable<Cuboid6> getOcclusionBoxes()
     {
-        return generateBoxes().toArray(new Cuboid6[0]);
+        return generateBoxes();
     }
     
     public Iterable<IndexedCuboid6> getSubParts()
     {
         ArrayList<Cuboid6> cuboids = generateBoxes();
         ArrayList<IndexedCuboid6> indexed = new ArrayList<IndexedCuboid6>();
-        indexed.add(new IndexedCuboid6(null, cuboids.get(0)));
+        for (Cuboid6 cuboid : cuboids)
+        {
+            indexed.add(new IndexedCuboid6(0, cuboids.get(0)));
+        }
         return indexed;
     }
 }

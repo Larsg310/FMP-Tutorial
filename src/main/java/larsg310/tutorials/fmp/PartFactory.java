@@ -8,13 +8,14 @@ public class PartFactory implements IPartFactory
 {
     public static void init()
     {
-        MultiPartRegistry.registerParts(new PartFactory(), new String[] {"examplePipe"});
+        MultiPartRegistry.registerParts(new PartFactory(), new String[] {ExamplePipe.type});
     }
     
     @Override
     public TMultiPart createPart(String name, boolean client)
     {
-        if(name.equals("examplePipe")) return new ExamplePipe();
+        System.out.println("createPart called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        if(name.equals(ExamplePipe.type)) return new ExamplePipe();
         return null;
     }
 }
