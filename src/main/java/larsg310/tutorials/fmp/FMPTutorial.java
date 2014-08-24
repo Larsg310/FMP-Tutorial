@@ -18,28 +18,14 @@ public class FMPTutorial
     
     @Instance(MODID)
     public static FMPTutorial instance;
-    @SidedProxy(clientSide = "larsg310.tutorials.fmp.ClientProxy", serverSide = "larsg310.tutorials.fmp.CommonProxy")
-    public static CommonProxy proxy;
     
     public static Item examplePipe;
     
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        examplePipe = new ItemPartExamplePipe();
-        GameRegistry.registerItem(examplePipe, "ExamplePipe");
-    }
-    
-    @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        proxy.registerRenderers();
+        examplePipe = new ItemPartExamplePipe();
         PartFactory.init();
-    }
-    
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        
+        GameRegistry.registerItem(examplePipe, "ExamplePipe");
     }
 }
