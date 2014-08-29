@@ -25,6 +25,7 @@ public class ItemPartExamplePipe extends Item implements TItemMultiPart
         return 0;
     }
     
+    @Override
     public TMultiPart newPart(ItemStack itemstack, EntityPlayer player, World world, BlockCoord blockCoord, int side, Vector3 vec3)
     {
         System.out.println("newPart called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
