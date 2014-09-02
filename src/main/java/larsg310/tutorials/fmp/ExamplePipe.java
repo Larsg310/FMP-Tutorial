@@ -19,9 +19,8 @@ public class ExamplePipe extends TMultiPart implements TNormalOcclusion
     
     public ArrayList<Cuboid6> generateBoxes()
     {
-        int w = 2;
         ArrayList<Cuboid6> boxes = new ArrayList<Cuboid6>();
-        boxes.add(new Cuboid6(0.5 - (w / 16), 0.5 - (w / 16), 0.5 - (w / 16), 0.5 + (w / 16), 0.5 + (w / 16), 0.5 + (w / 16)));
+        boxes.add(new Cuboid6(0.375, 0.375, 0.375, 0.625, 0.625, 0.625));
         return boxes;
     }
     
