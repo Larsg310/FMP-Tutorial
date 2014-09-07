@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.vec.Cuboid6;
+import codechicken.lib.vec.Rotation;
+import codechicken.lib.vec.Vector3;
 import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TNormalOcclusion;
 
@@ -20,7 +22,12 @@ public class ExamplePipe extends TMultiPart implements TNormalOcclusion
     public ArrayList<Cuboid6> generateBoxes()
     {
         ArrayList<Cuboid6> boxes = new ArrayList<Cuboid6>();
-        boxes.add(new Cuboid6(0.375, 0.375, 0.375, 0.625, 0.625, 0.625));
+        float width = 2F / 8F;
+        for (int index = 0; index < 6; index++)
+        {
+            boxes.add(new Cuboid6(0.5 - width, 0, 0.5 - width, 0.5 + width, 0.5 - width, 0.5 + width).apply(Rotation.sideRotations[index].at(Vector3.center)));
+        }
+        boxes.add(new Cuboid6(0.5F - width, 0.5F - width, 0.5F - width, 0.5F + width, 0.5F + width, 0.5F + width));
         return boxes;
     }
     
@@ -31,7 +38,9 @@ public class ExamplePipe extends TMultiPart implements TNormalOcclusion
     
     public Iterable<Cuboid6> getOcclusionBoxes()
     {
-        return generateBoxes();
+        ArrayList<Cuboid6> boxes = new ArrayList<Cuboid6>();
+        boxes.add(generateBoxes().get(6));
+        return boxes;
     }
     
     public Iterable<IndexedCuboid6> getSubParts()
@@ -40,7 +49,7 @@ public class ExamplePipe extends TMultiPart implements TNormalOcclusion
         ArrayList<IndexedCuboid6> indexed = new ArrayList<IndexedCuboid6>();
         for (Cuboid6 cuboid : cuboids)
         {
-            indexed.add(new IndexedCuboid6(0, cuboids.get(0)));
+            indexed.add(new IndexedCuboid6(0, cuboid));
         }
         return indexed;
     }
