@@ -3,6 +3,8 @@ package larsg310.tutorials.fmp;
 import java.util.ArrayList;
 
 import codechicken.lib.raytracer.IndexedCuboid6;
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Rotation;
 import codechicken.lib.vec.Vector3;
@@ -52,5 +54,24 @@ public class ExamplePipe extends TMultiPart implements TNormalOcclusion
             indexed.add(new IndexedCuboid6(0, cuboid));
         }
         return indexed;
+    }
+    
+    public boolean renderStatic(Vector3 pos, int pass)
+    {
+        TextureUtils.bindAtlas(0);
+        float uMin = FMPTutorial.examplePipe.sprite.getMinU();
+        float uMax = FMPTutorial.examplePipe.sprite.getMaxU();
+        float vMin = FMPTutorial.examplePipe.sprite.getMinV();
+        float vMax = FMPTutorial.examplePipe.sprite.getMaxV();
+        // RENDER STUFF
+        return true;
+    }
+    
+    public void renderDynamic(Vector3 pos, float frame, int pass)
+    {
+        TextureUtils.bindAtlas(0);
+        CCRenderState.startDrawing();
+        // RENDER STUFF
+        CCRenderState.draw();
     }
 }
